@@ -6,7 +6,7 @@ Escodegen ([escodegen](http://github.com/estools/escodegen)) is an
 [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 (also popularly known as [JavaScript](http://en.wikipedia.org/wiki/JavaScript))
 code generator from [Mozilla's Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API)
-AST. See the [online generator](https://estools.github.io/escodegen/demo/index.html)
+AST. See the [online generator](https://code4fukui.github.io/escodegen/demo/)
 for a demo.
 
 ### Usage
@@ -20,7 +20,7 @@ const res = escodegen.generate({
   type: 'BinaryExpression',
   operator: '+',
   left: { type: 'Literal', value: 40 },
-  right: { type: 'Literal', value: 2 }
+  right: { type: 'Literal', value: 2 },
 });
 console.log(res);
 ```
@@ -36,7 +36,9 @@ options. To run the tests, execute `npm test` in the root directory.
 import * as esprima from "https://code4fukui.github.io/esprima/es/esprima.min.js";
 import escodegen from "https://code4fukui.github.io/escodegen/escodegen.js";
 
-const program = "const res = await func()";
+const program = "const answer = 42"
+const tokens = esprima.tokenize(program);
+console.log(tokens);
 const ast = esprima.parseScript(program);
 console.log(ast);
 const res = escodegen.generate(ast);
