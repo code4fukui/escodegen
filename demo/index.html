@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JS code generator demo: JS → AST → JS</title>
+</head>
+<body>
+<h1>JS code generator demo: JS → AST → JS</h1>
+<p>using <a href="http://esprima.org/">esprima</a> as parser,
+and using <a href="https://github.com/Constellation/escodegen">escodegen</a> as code generator</p>
+<textarea id="textarea" rows="10" cols="30" placeholder="write your code">for(let i=1;i<=100;i++){if(i%15===0){console.log('FizzBuzz')}else if(i%3===0){console.log('Fizz')}else if(i%5===0){console.log('Buzz')}else{console.log(i)}}</textarea>
+<textarea id="output"></textarea>
+<hr>
+<a href=https://github.com/code4fukui/escodegen/>escodegen - src on GitHub</a><br>
+
+<script type="module">
+import * as esprima from "https://code4fukui.github.io/esprima/es/esprima.min.js";
+import escodegen from "https://code4fukui.github.io/escodegen/escodegen.js";
+
+const show = () => {
+  try {
+    const ast = esprima.parse(textarea.value);
+    output.value = escodegen.generate(ast);
+  } catch (e) {
+    output.value = "Invalid";
+  }
+};
+show();
+textarea.addEventListener("input", show, false);
+</script>
+</head>
+
+<style>
+textarea {
+  width: 80vw;
+  height: 16em;
+}
+a {
+  color: gray !important;
+}
+</style>
+
+</body>
+</html>
