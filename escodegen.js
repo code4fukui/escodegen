@@ -35,15 +35,15 @@
 */
 
 /*global exports:true, require:true, global:true*/
-(function () {
-    'use strict';
+
+import package_json from "./package.json" assert { type: "json"};
+
+const exports = {};
 
     var Syntax,
         Precedence,
         BinaryPrecedence,
         SourceNode,
-        estraverse,
-        esutils,
         base,
         indent,
         json,
@@ -65,8 +65,8 @@
         FORMAT_MINIFY,
         FORMAT_DEFAULTS;
 
-    estraverse = require('estraverse');
-    esutils = require('esutils');
+    import * as estraverse from "https://code4fukui.github.io/estraverse/estraverse.js";
+    import * as esutils from "https://code4fukui.github.io/esutils/lib/utils.js";
 
     Syntax = estraverse.Syntax;
 
@@ -2609,7 +2609,7 @@
             if (!exports.browser) {
                 // We assume environment is node.js
                 // And prevent from including source-map by browserify
-                SourceNode = require('source-map').SourceNode;
+                //SourceNode = require('source-map').SourceNode;
             } else {
                 SourceNode = global.sourceMap.SourceNode;
             }
@@ -2656,12 +2656,12 @@
 
     FORMAT_DEFAULTS = getDefaultOptions().format;
 
-    exports.version = require('./package.json').version;
+    exports.version = package_json.version;
     exports.generate = generate;
     exports.attachComments = estraverse.attachComments;
     exports.Precedence = updateDeeply({}, Precedence);
     exports.browser = false;
     exports.FORMAT_MINIFY = FORMAT_MINIFY;
     exports.FORMAT_DEFAULTS = FORMAT_DEFAULTS;
-}());
-/* vim: set sw=4 ts=4 et tw=80 : */
+
+export default exports;
