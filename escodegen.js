@@ -65,7 +65,7 @@ const exports = {};
         FORMAT_MINIFY,
         FORMAT_DEFAULTS;
 
-    import * as estraverse from "https://code4fukui.github.io/estraverse/estraverse.js";
+    import estraverse from "https://code4fukui.github.io/estraverse/estraverse.js";
     import * as esutils from "https://code4fukui.github.io/esutils/lib/utils.js";
 
     Syntax = estraverse.Syntax;
