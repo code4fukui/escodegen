@@ -36,7 +36,7 @@
 
 /*global exports:true, require:true, global:true*/
 
-import package_json from "./package.json" assert { type: "json"};
+//import package_json from "./package.json" assert { type: "json"};
 
 const exports = {};
 
@@ -2656,7 +2656,7 @@ const exports = {};
 
     FORMAT_DEFAULTS = getDefaultOptions().format;
 
-    exports.version = package_json.version;
+    //exports.version = package_json.version;
     exports.generate = generate;
     exports.attachComments = estraverse.attachComments;
     exports.Precedence = updateDeeply({}, Precedence);
