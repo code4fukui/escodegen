@@ -1,74 +1,54 @@
-## Escodegen ES modules version
+# escodegen
 
-Escodegen ES modules version is forked Escodegen.
+[
+![License: BSD-2-Clause](https://img.shields.io/badge/License-BSD--2--Clause-blue.svg)
+](LICENSE.BSD)
 
-Escodegen ([escodegen](http://github.com/estools/escodegen)) is an
-[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-(also popularly known as [JavaScript](http://en.wikipedia.org/wiki/JavaScript))
-code generator from [Mozilla's Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API)
-AST. See the [online generator](https://code4fukui.github.io/escodegen/demo/)
-for a demo.
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-### Usage
+This project is an ES Module fork of the original [estools/escodegen](http://github.com/estools/escodegen), a robust, well-tested [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm) (JavaScript) code generator. It generates code from a syntax tree that conforms to the [Mozilla Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API).
 
-A simple example: the program
+This version is designed for direct use in modern environments like browsers and Deno, without requiring a build step or local installation.
 
-```JavaScript
+## Usage
+
+You can import `escodegen` directly from the CDN in your project.
+
+A simple example:
+
+```javascript
 import escodegen from "https://code4fukui.github.io/escodegen/escodegen.js";
 
-const res = escodegen.generate({
+const ast = {
   type: 'BinaryExpression',
   operator: '+',
   left: { type: 'Literal', value: 40 },
   right: { type: 'Literal', value: 2 },
-});
-console.log(res);
+};
+
+const code = escodegen.generate(ast);
+console.log(code);
 ```
 
-produces the string `'40 + 2'`.
+This program produces the string `'40 + 2'`.
 
-See the [API page](https://github.com/estools/escodegen/wiki/API) for
-options. To run the tests, execute `npm test` in the root directory.
+## Usage with a Parser (esprima)
 
-### Sample with esprima
+`escodegen` is often used with a parser like `esprima` to modify and regenerate JavaScript code.
 
-```JavaScript
+```javascript
 import * as esprima from "https://code4fukui.github.io/esprima/es/esprima.min.js";
 import escodegen from "https://code4fukui.github.io/escodegen/escodegen.js";
 
-const program = "const answer = 42"
-const tokens = esprima.tokenize(program);
-console.log(tokens);
+const program = "const answer = 42";
 const ast = esprima.parseScript(program);
-console.log(ast);
-const res = escodegen.generate(ast);
-console.log(res);
+
+// You can manipulate the AST here
+
+const generatedCode = escodegen.generate(ast);
+console.log(generatedCode); // 'const answer = 42;'
 ```
 
-### License
+## API Reference
 
-#### Escodegen
-
-Copyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)
- (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-  * Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+This fork maintains compatibility with the original `escodegen` API. For a complete list of code generation options, please refer to the **[original API documentation](https://github.com/
